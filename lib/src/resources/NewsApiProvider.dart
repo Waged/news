@@ -1,20 +1,22 @@
 import 'package:http/http.dart' show Client;
 import 'dart:convert';
 import '../models/ItemModel.dart';
+import 'dart:async';
+import 'Repository.dart';
 
-class NewsApiProvider {
+class NewsApiProvider implements Source {
   Client client = Client();
   final  _root = "https://hacker-news.firebaseio.com/v0";
 
-  fetchTopIds() async {
+  Future<List<int>>fetchTopIds() async {
     final response = await client.get(
-        "$_root/topstories.json?print=pretty");
-    final ids = json.decode(response.body);
-    return ids;
+        "$_root/topstories.json");
+    final ids =  json.decode(response.body);
+    return ids.cast<int>();
   }
 
-  fetchItem(int id) async {
-// https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty
+  Future<ItemModel>fetchItem(int id) async {
+// https://hacker-news.firebaseio.com/v0/item/8863.json
     final response = await client.get("$_root/item/$id.json");
     final parsedJson =  json.decode(response.body);
     return ItemModel.fromJson(parsedJson);
