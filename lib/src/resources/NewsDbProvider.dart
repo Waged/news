@@ -13,9 +13,10 @@ class NewsDbProvider implements Source, Cache {
     init();
   }
 
+
   void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, "Items.db");
+    final path = join(documentsDirectory.path, "Itemz.db");
     db = await openDatabase(path, version: 1,
         onCreate: (Database newDb, int version) {
       newDb.execute(""" 
@@ -62,6 +63,11 @@ class NewsDbProvider implements Source, Cache {
   Future<List<int>> fetchTopIds() {
     // TODO: implement fetchTopIds
     return null;
+  }
+
+  @override
+  Future<int> clear() {
+    return db.delete("Items");
   }
 }
 
