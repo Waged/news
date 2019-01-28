@@ -7,7 +7,7 @@ class LoadingContainer extends StatelessWidget {
       children: <Widget>[
         ListTile(
           title: buildBox(),
-          subtitle:  buildBox2(),
+          subtitle:  buildBox(),
         )
       ],
     );
@@ -18,17 +18,9 @@ class LoadingContainer extends StatelessWidget {
       color: Colors.grey[200],
       height: 24.0,
       width: 150.0,
-      margin: EdgeInsets.only(top: 4.0, bottom: 4.0),
+      margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
     );
   }
 
-  Widget buildBox2() {
-    return Container(
-      color: Colors.grey[200],
-      height: 24.0,
-      width: 30.0,
-      margin: EdgeInsets.only(top: 4.0, bottom: 4.0),
-    );
-  }
 
 }
